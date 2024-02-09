@@ -21,7 +21,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_compile_options(-pedantic -Wall -Wextra)
+add_compile_options(-pedantic -Wall -Wextra -Werror=vla)
 
 add_executable(run-main sorter.h main.cpp)
 add_executable(run-tests sorter.h tests/sneaky-student-sort.h tests/tests.cpp)
