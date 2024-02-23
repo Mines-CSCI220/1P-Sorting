@@ -22,6 +22,10 @@ bool  student_sort_object::student_sort_passed = true;
 
 void set_student_sort_failure( const char* const n ) 
 { 
+	/***
+	 * No, this output is not buggy.  Turns out on at least one common CPP library distribution
+	 * all four sorting routines lead to standard sort.
+	 */
 	std::cerr << std::endl;
 	std::cerr << "Please don't use std::"<< n << " or it's variants to satisfy this project's sorting requirements." << std::endl;
 	std::cerr << "Implement merge sort as specified in the project write-up." << std::endl << std::endl;
@@ -80,15 +84,15 @@ SN_CONSTEXPR void partial_sort( vector<student_sort_object>::iterator,
 
 template< class InputIt >
 SN_CONSTEXPR vector<student_sort_object>::iterator partial_sort_copy( InputIt, 
-		vector<student_sort_object>::iterator, vector<student_sort_object>::iterator,
+		vector<student_sort_object>::iterator r, vector<student_sort_object>::iterator,
 		vector<student_sort_object>::iterator, vector<student_sort_object>::iterator )
-{ set_student_sort_failure( "partial_copy_sort" ); }
+{ set_student_sort_failure( "partial_copy_sort" ); return r; }
 
 template< class InputIt, class Compare >
 SN_CONSTEXPR vector<student_sort_object>::iterator partial_sort_copy( InputIt, 
-		vector<student_sort_object>::iterator, vector<student_sort_object>::iterator,
+		vector<student_sort_object>::iterator r, vector<student_sort_object>::iterator,
 		vector<student_sort_object>::iterator, vector<student_sort_object>::iterator, Compare )
-{ set_student_sort_failure( "partial_copy_sort" ); }
+{ set_student_sort_failure( "partial_copy_sort" ); return r; }
 
 
 #if __cplusplus >= 201700L
@@ -110,14 +114,14 @@ SN_CONSTEXPR void partial_sort( ExcPolicy&&, vector<student_sort_object>::iterat
 template< class ExcPolicy, class ForwardIt>
 vector<student_sort_object>::iterator partial_sort_copy( ExcPolicy&& policy, 
 		ForwardIt first, ForwardIt last,
-		vector<student_sort_object>::iterator, vector<student_sort_object>::iterator )
-{ set_student_sort_failure("partial_copy_sort"); }
+		vector<student_sort_object>::iterator r, vector<student_sort_object>::iterator )
+{ set_student_sort_failure("partial_copy_sort"); return r; }
 
 template< class ExcPolicy, class ForwardIt, class Compare>
 vector<student_sort_object>::iterator partial_sort_copy( ExcPolicy&& policy, 
 		ForwardIt first, ForwardIt last,
-		vector<student_sort_object>::iterator, vector<student_sort_object>::iterator, Compare )
-{ set_student_sort_failure("partial_copy_sort"); }
+		vector<student_sort_object>::iterator r, vector<student_sort_object>::iterator, Compare )
+{ set_student_sort_failure("partial_copy_sort"); return r; }
 
 #endif
 #undef SN_CONSTEXPR
