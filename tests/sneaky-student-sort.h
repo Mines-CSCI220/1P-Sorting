@@ -3,6 +3,7 @@
  * implementation and not std::sort
  */
 
+#include <iostream>
 #include <algorithm>
 
 #ifndef SORTING_STUDENT_SORT_H
@@ -17,6 +18,13 @@ struct student_sort_object {
     int _x;
 	static bool student_sort_passed;
 };
+
+// so student_sort_objects can be printed in debug code (without this, students
+// simply get build errors)
+static inline std::ostream& operator<<( std::ostream& os, const student_sort_object& soo )
+{
+	return os << "soo(" << soo._x  << ")" ;
+}
 
 bool  student_sort_object::student_sort_passed = true;
 
