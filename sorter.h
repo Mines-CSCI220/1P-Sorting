@@ -30,7 +30,7 @@
  */
 
 template <class T>
-void sorter(vector<T> &items, size_t k) {  
+void sorter(std::vector<T> &items, size_t k) {  
 	using namespace std;
 	// write your solution for k-way merge sort below	
 }
